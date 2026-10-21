@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import { FaCode, FaServer, FaTools } from "react-icons/fa";
 
 export default function Experties() {
@@ -134,6 +135,18 @@ export default function Experties() {
               </span>
             ))}
           </div>
+        </div>
+
+        <div className="mt-8">
+          <NavLink
+            to="/skills"
+            className="inline-flex items-center gap-2 text-sm font-semibold text-orange-600 transition-colors duration-300 hover:text-orange-700"
+          >
+            View in details
+            <span className="transition-transform duration-300 hover:translate-x-1">
+              →
+            </span>
+          </NavLink>
         </div>
       </div>
     </section>

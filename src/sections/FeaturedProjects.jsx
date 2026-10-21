@@ -35,9 +35,12 @@ export default function FeaturedProjects() {
         <div className="mt-12 text-center">
           <NavLink
             to="/projects"
-            className="inline-flex items-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold text-neutral-800 transition-all duration-200  hover:text-orange-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500"
+            className="inline-flex items-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold text-orange-600 transition-colors duration-300 hover:text-orange-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500"
           >
             View All Projects
+            <span className="transition-transform duration-300 hover:translate-x-1">
+              →
+            </span>
           </NavLink>
         </div>
       </div>

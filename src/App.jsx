@@ -5,6 +5,7 @@ import Footer from "./components/layout/Footer.jsx";
 
 import Home from "./pages/Home.jsx";
 import Projects from "./pages/Projects.jsx";
+import Skills from "./pages/Skills.jsx";
 
 export default function App() {
   return (
@@ -14,6 +15,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/projects" element={<Projects />} />
+        <Route path="/skills" element={<Skills />} />
       </Routes>
       <Footer />
     </>
