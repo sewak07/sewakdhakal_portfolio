@@ -1,6 +1,11 @@
-const SkillsInfo = [
+import {
+  FaCode,
+  FaServer,
+  FaTools
+} from "react-icons/fa";
+
+const categories = [
   {
-    number: "01",
     title: "Frontend Development",
     subtitle: "Building intuitive user interfaces",
     description:
@@ -64,7 +69,6 @@ const SkillsInfo = [
     ],
   },
   {
-    number: "02",
     title: "Backend Development",
     subtitle: "Building application logic and APIs",
     description:
@@ -122,7 +126,6 @@ const SkillsInfo = [
     ],
   },
   {
-    number: "03",
     title: "Tools & Platforms",
     subtitle: "Developing, testing, and shipping projects",
     description:
@@ -175,4 +178,4 @@ const SkillsInfo = [
   },
 ];
 
-export default SkillsInfo;
+export default categories;

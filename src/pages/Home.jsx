@@ -10,11 +10,11 @@ export default function Home() {
         <Hero />
       </section>
 
-      <section>
+      <section id="featuredProjects" className="scroll-mt-24">
         <FeaturedProjects />
       </section>
 
-      <section>
+      <section id="skills">
         <Experties />
       </section>
 

@@ -20,7 +20,7 @@ const projects = [
       "eSewa Integration",
     ],
     code: "https://github.com/sewak07/osoaa-fullstack-development",
-    demo: "",
+    demo: "https://nepalprotein.com",
     isFeatured: true,
   },
   {
@@ -52,7 +52,7 @@ const projects = [
     isFeatured: false,
   },
   {
-    img: "/politicshub.jpg",
+    img: "/politicshub.png",
     title: "Politics hub",
     description: "",
     tech: [
@@ -69,10 +69,10 @@ const projects = [
     isFeatured: false,
   },
   {
-    img: "/nexustech.jpg",
+    img: "/nexustech.png",
     title: "Nexus Tech (Ecommerce Website)",
     description:
-      "A modern, full-stack e-commerce platform built with the MERN stack and designed around real-world shopping workflows. The platform provides a complete online shopping experience—from product discovery and cart management to secure checkout and order processing. It includes secure authentication, role-based access control, product and category management, wishlist and cart functionality, an admin dashboard, and integrated online payments through eSewa.",
+      "A modern, full-stack e-commerce platform built with the MERN stack and designed around real-world shopping workflows.",
     tech: [
       "React",
       "Node.js",
@@ -89,7 +89,7 @@ const projects = [
     isFeatured: true,
   },
   {
-    img: "/freefire.jpg",
+    img: "/freefire.png",
     title: "FFARENA (E-sport Website)",
     description:
       "E-sport tournament website from popular mobile game Free Fire.",
@@ -99,7 +99,7 @@ const projects = [
     isFeatured: false,
   },
   {
-    img: "/portfolio.jpg",
+    img: "/portfolio.png",
     title: "Portfolio",
     description:
       "Personal developer portfolio showcasing projects, skills, and contact information.",
@@ -111,3 +111,6 @@ const projects = [
 ];
 
 export default projects;
+
+
+

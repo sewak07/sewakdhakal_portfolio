@@ -6,6 +6,8 @@ import {
   FaLocationArrow,
 } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
+import { NavLink } from "react-router-dom";
+import links from "../../utils/Links.js";
 
 export default function Footer() {
   const socialLinks = [
@@ -32,7 +34,7 @@ export default function Footer() {
   ];
   return (
     <footer className="border-t border-neutral-200 bg-white">
-      <div className="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-5 py-12 sm:px-8 md:grid-cols-2 md:gap-8">
+      <div className="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-5 py-12 sm:px-8 md:grid-cols-[1fr_auto_1fr] md:gap-16">
         <div className="space-y-3">
           <a
             href="/"
@@ -47,6 +49,32 @@ export default function Footer() {
           <p className="max-w-sm text-sm leading-6 text-neutral-500">
             Building useful digital experiences, one project at a time.
           </p>
+        </div>
+
+        {/* Quick Links */}
+        <div>
+          <h3 className="mb-4 text-sm font-semibold uppercase tracking-widest text-neutral-900">
+            Quick Links
+          </h3>
+
+          <div className="flex flex-col items-start gap-3">
+            {links.map((link) => (
+              <NavLink
+                key={link.path}
+                to={link.path}
+                end={link.path === "/"}
+                className={({ isActive }) =>
+                  `text-sm font-medium capitalize transition-colors duration-200 ${
+                    isActive
+                      ? "text-orange-500"
+                      : "text-neutral-600 hover:text-orange-500"
+                  }`
+                }
+              >
+                {link.name}
+              </NavLink>
+            ))}
+          </div>
         </div>
 
         <div className="md:justify-self-end">

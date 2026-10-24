@@ -1,53 +1,7 @@
 import { NavLink } from "react-router-dom";
-import { FaCode, FaServer, FaTools } from "react-icons/fa";
+import categories from "../utils/SkillsInfo";
 
 export default function Experties() {
-  const experties = [
-    {
-      name: "Frontend Development",
-      icon: FaCode,
-      tech: [
-        "React",
-        "Tailwind CSS",
-        "Material UI",
-        "React Router",
-        "React Hook Form",
-        "HTML",
-        "CSS",
-        "JavaScript",
-        "Vite",
-      ],
-    },
-    {
-      name: "Backend Development",
-      icon: FaServer,
-      tech: [
-        "Node.js",
-        "Express.js",
-        "MongoDB",
-        "Mongoose",
-        "REST APIs",
-        "JWT",
-        "Bcrypt",
-        "Postman",
-        "MySQL",
-      ],
-    },
-    {
-      name: "Tools & Platforms",
-      icon: FaTools,
-      tech: [
-        "Git",
-        "GitHub",
-        "VS Code",
-        "Postman",
-        "Vercel",
-        "Canva",
-        "Antigravity",
-      ],
-    },
-  ];
-
   const dailyTech = [
     "React",
     "Tailwind CSS",
@@ -68,7 +22,7 @@ export default function Experties() {
           </p>
 
           <h2 className="text-3xl font-bold tracking-tight text-neutral-900 sm:text-4xl lg:text-5xl">
-            Skills & <span className="text-orange-500">Technologies.</span>
+            Skills & Technologies.
           </h2>
 
           <p className="mt-4 text-base leading-7 text-neutral-600 sm:text-lg">
@@ -79,31 +33,41 @@ export default function Experties() {
 
         {/* Skills Cards */}
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {experties.map((item) => {
+          {categories.map((item) => {
             const Icon = item.icon;
 
             return (
               <div
-                key={item.name}
+                key={item.title}
                 className="group rounded-2xl border border-neutral-200 bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:border-orange-200 hover:shadow-xl hover:shadow-orange-500/5 sm:p-7"
               >
                 <div className="mb-6 flex items-center gap-4">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-orange-50 text-orange-600 transition-colors duration-300 group-hover:bg-orange-500 group-hover:text-white">
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-orange-50 text-orange-600 transition-colors duration-300 group-hover:bg-orange-500 group-hover:text-white">
                     <Icon size={23} aria-hidden="true" />
                   </div>
 
-                  <h3 className="text-lg font-bold text-neutral-900">
-                    {item.name}
-                  </h3>
+                  <div>
+                    <h3 className="text-lg font-bold text-neutral-900">
+                      {item.title}
+                    </h3>
+
+                    <p className="mt-1 text-sm text-neutral-500">
+                      {item.subtitle}
+                    </p>
+                  </div>
                 </div>
 
+                <p className="mb-5 text-sm leading-6 text-neutral-600">
+                  {item.description}
+                </p>
+
                 <div className="flex flex-wrap gap-2">
-                  {item.tech.map((techItem) => (
+                  {item.technologies.map((techItem) => (
                     <span
-                      key={techItem}
+                      key={techItem.name}
                       className="rounded-lg border border-neutral-200 bg-neutral-50 px-3 py-2 text-sm font-medium text-neutral-600 transition-all duration-200 hover:border-orange-200 hover:bg-orange-50 hover:text-orange-700"
                     >
-                      {techItem}
+                      {techItem.name}
                     </span>
                   ))}
                 </div>
@@ -137,13 +101,17 @@ export default function Experties() {
           </div>
         </div>
 
+        {/* View All Skills */}
         <div className="mt-8">
           <NavLink
             to="/skills"
             className="inline-flex items-center gap-2 text-sm font-semibold text-orange-600 transition-colors duration-300 hover:text-orange-700"
           >
-            View in details
-            <span className="transition-transform duration-300 hover:translate-x-1">
+            View All Skills
+            <span
+              aria-hidden="true"
+              className="transition-transform duration-300 group-hover:translate-x-1"
+            >
               →
             </span>
           </NavLink>

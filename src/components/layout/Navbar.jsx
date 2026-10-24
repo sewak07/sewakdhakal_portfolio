@@ -1,13 +1,7 @@
 import { NavLink } from "react-router-dom";
+import links from "../../utils/Links.js";
 
 export default function Navbar() {
-  const links = [
-    { name: "home", path: "/" },
-    { name: "projects", path: "/projects" },
-    { name: "skills", path: "/skills" },
-    { name: "contact", path: "/contact" },
-  ];
-
   return (
     <nav className="sticky top-0 z-50 border-b border-neutral-200 bg-white/95 backdrop-blur-sm">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4 md:px-8">
@@ -25,9 +19,9 @@ export default function Navbar() {
               to={link.path}
               end={link.path === "/"}
               className={({ isActive }) =>
-                `text-sm font-medium capitalize tranition-colors duration-200 sm:text-base ${
+                `text-sm font-medium capitalize transition-colors duration-200 sm:text-base ${
                   isActive
-                    ? "text -orange-500"
+                    ? "text-orange-500"
                     : "text-neutral-600 hover:text-orange-500"
                 }`
               }

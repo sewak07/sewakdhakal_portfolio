@@ -1,438 +1,331 @@
+
+import { useState } from "react";
+import { NavLink } from "react-router-dom";
 import {
   FaCode,
   FaServer,
   FaTools,
-  FaLayerGroup,
   FaArrowRight,
 } from "react-icons/fa";
-
-const categories = [
-  {
-    number: "01",
-    title: "Frontend Development",
-    subtitle: "Building intuitive user interfaces",
-    description:
-      "I build responsive, accessible, and user-friendly web interfaces with a focus on clean layouts, reusable components, and consistent user experiences across devices.",
-    icon: FaCode,
-    technologies: [
-      {
-        name: "HTML5",
-        level: "Core",
-        description:
-          "Structure web pages with semantic HTML, accessible elements, forms, and meaningful document layouts.",
-      },
-      {
-        name: "CSS3",
-        level: "Core",
-        description:
-          "Style interfaces with responsive layouts, Flexbox, Grid, transitions, animations, and maintainable CSS.",
-      },
-      {
-        name: "JavaScript",
-        level: "Core",
-        description:
-          "Build interactive features using modern JavaScript, ES modules, array methods, asynchronous operations, and DOM fundamentals.",
-      },
-      {
-        name: "React",
-        level: "Core",
-        description:
-          "Create component-based interfaces using props, state, hooks, reusable components, and conditional rendering.",
-      },
-      {
-        name: "Tailwind CSS",
-        level: "UI Styling",
-        description:
-          "Develop responsive designs efficiently using utility classes, consistent spacing, design tokens, and reusable styling patterns.",
-      },
-      {
-        name: "Material UI",
-        level: "UI Library",
-        description:
-          "Build polished interfaces with ready-made React components, theming, layouts, and accessible UI patterns.",
-      },
-      {
-        name: "React Router",
-        level: "Routing",
-        description:
-          "Create multi-page React experiences with route configuration, navigation, dynamic routes, and nested layouts.",
-      },
-      {
-        name: "React Hook Form",
-        level: "Forms",
-        description:
-          "Manage form state and validation efficiently while keeping form components maintainable and performant.",
-      },
-      {
-        name: "Vite",
-        level: "Build Tool",
-        description:
-          "Set up and run modern frontend projects with a fast development server, efficient builds, and environment configuration.",
-      },
-    ],
-  },
-  {
-    number: "02",
-    title: "Backend Development",
-    subtitle: "Building application logic and APIs",
-    description:
-      "I develop server-side functionality, REST APIs, database integrations, and authentication flows to connect frontend applications with reliable backend services.",
-    icon: FaServer,
-    technologies: [
-      {
-        name: "Node.js",
-        level: "Runtime",
-        description:
-          "Run JavaScript on the server and implement asynchronous application logic, API services, and backend integrations.",
-      },
-      {
-        name: "Express.js",
-        level: "Framework",
-        description:
-          "Build REST APIs with routes, middleware, controllers, error handling, and organized server-side architecture.",
-      },
-      {
-        name: "MongoDB",
-        level: "Database",
-        description:
-          "Store and retrieve application data using document-based collections, queries, filters, and appropriate data structures.",
-      },
-      {
-        name: "Mongoose",
-        level: "ODM",
-        description:
-          "Define schemas and models, validate data, manage relationships, and interact with MongoDB through a structured application layer.",
-      },
-      {
-        name: "REST APIs",
-        level: "API Design",
-        description:
-          "Design HTTP endpoints with appropriate methods, status codes, request validation, and consistent response structures.",
-      },
-      {
-        name: "JWT",
-        level: "Authentication",
-        description:
-          "Implement token-based authentication flows and understand token verification, expiry, and protected routes.",
-      },
-      {
-        name: "Bcrypt",
-        level: "Security",
-        description:
-          "Hash passwords securely and verify submitted credentials without storing passwords in plain text.",
-      },
-      {
-        name: "MySQL",
-        level: "SQL Database",
-        description:
-          "Work with relational data, tables, SQL queries, filtering, joins, and structured database relationships.",
-      },
-    ],
-  },
-  {
-    number: "03",
-    title: "Tools & Platforms",
-    subtitle: "Developing, testing, and shipping projects",
-    description:
-      "I use development tools and platforms to write code, manage source control, test APIs, prepare visual assets, and deploy projects for real-world use.",
-    icon: FaTools,
-    technologies: [
-      {
-        name: "Git",
-        level: "Version Control",
-        description:
-          "Track code changes, create branches, manage commits, and maintain a clear development history.",
-      },
-      {
-        name: "GitHub",
-        level: "Collaboration",
-        description:
-          "Host repositories, manage project versions, collaborate through pull requests, and maintain project documentation.",
-      },
-      {
-        name: "VS Code",
-        level: "Editor",
-        description:
-          "Write and debug code using extensions, integrated terminals, source control tools, and a customized development environment.",
-      },
-      {
-        name: "Postman",
-        level: "API Testing",
-        description:
-          "Send HTTP requests, inspect API responses, test endpoints, and troubleshoot backend integrations.",
-      },
-      {
-        name: "Vercel",
-        level: "Deployment",
-        description:
-          "Deploy frontend projects, configure environment variables, and manage production builds and deployment previews.",
-      },
-      {
-        name: "Canva",
-        level: "Design",
-        description:
-          "Prepare visual assets, presentation materials, and simple graphics for projects and digital content.",
-      },
-      {
-        name: "Antigravity",
-        level: "AI Development",
-        description:
-          "Use AI-assisted development workflows to explore solutions, implement features, and support debugging and code review.",
-      },
-    ],
-  },
-];
-
-const dailyTechnologies = [
-  "JavaScript",
-  "React",
-  "Tailwind CSS",
-  "Node.js",
-  "Express.js",
-  "MongoDB",
-  "Git",
-  "GitHub",
-];
+import categories from "../utils/SkillsInfo";
 
 export default function Skills() {
-  const totalTechnologies = categories.reduce(
-    (total, category) => total + category.technologies.length,
-    0
+  const [activeCategory, setActiveCategory] = useState(
+    "Frontend Development"
   );
+
+  const categoryOptions = [
+    { label: "Frontend", value: "Frontend Development" },
+    { label: "Backend", value: "Backend Development" },
+    { label: "Tools & Platforms", value: "Tools & Platforms" },
+  ];
+
+  const filteredCategories = categories.filter(
+    (category) => category.title === activeCategory
+  );
+
+  const categoryIcons = {
+    "Frontend Development": FaCode,
+    "Backend Development": FaServer,
+    "Tools & Platforms": FaTools,
+  };
 
   return (
     <main className="min-h-screen bg-white text-neutral-900">
-      {/* Hero */}
-      <section className="relative overflow-hidden border-b border-neutral-200">
-        <div className="pointer-events-none absolute -right-24 -top-24 h-80 w-80 rounded-full bg-orange-100/70 blur-3xl" />
+      {/* Hero Banner */}
+      <section className="px-5 pb-12 pt-10 sm:px-8 sm:pb-16 sm:pt-14 lg:pb-20 lg:pt-16">
+        <div className="mx-auto max-w-6xl">
+          <div className="relative isolate overflow-hidden rounded-3xl border border-orange-100 bg-gradient-to-br from-orange-50 via-white to-neutral-50">
+            {/* Background Decorations */}
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute -right-20 -top-24 -z-10 h-72 w-72 rounded-full bg-orange-200/40 blur-3xl"
+            />
 
-        <div className="relative mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-28">
-          <div className="max-w-3xl">
-            <p className="mb-5 flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.2em] text-orange-600">
-              <span className="h-px w-8 bg-orange-500" />
-              Skills & Technologies
-            </p>
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute -bottom-24 left-1/4 -z-10 h-64 w-64 rounded-full bg-orange-100/70 blur-3xl"
+            />
 
-            <h1 className="text-4xl font-bold leading-tight tracking-tight sm:text-5xl md:text-6xl">
-              The tools behind
-              <span className="block text-neutral-400">
-                the things I build.
-              </span>
-            </h1>
+            <div className="grid items-center gap-8 p-6 sm:p-10 lg:grid-cols-2 lg:gap-12 lg:p-14">
+              {/* Hero Content */}
+              <div className="relative z-10">
+                <span className="text-xs font-semibold uppercase tracking-[0.18em] text-orange-700 sm:text-sm">
+                  My Expertise
+                </span>
 
-            <p className="mt-6 max-w-2xl text-base leading-8 text-neutral-600 sm:text-lg">
-              My technical toolkit covers frontend interfaces, backend
-              development, databases, and deployment tools. I focus on using
-              the right technologies to build practical, responsive, and
-              maintainable web applications.
-            </p>
+                <h1 className="mt-3 max-w-xl text-4xl font-bold leading-tight tracking-tight text-neutral-900 sm:text-5xl lg:text-6xl">
+                  My Technical
+                  <span className="mt-1 block text-orange-500">
+                    Skills &amp; Tools.
+                  </span>
+                </h1>
 
-            <div className="mt-9 flex flex-wrap gap-3">
-              <a
-                href="#technical-skills"
-                className="inline-flex items-center gap-3 rounded-xl bg-neutral-900 px-5 py-3.5 text-sm font-semibold text-white transition hover:bg-orange-600"
-              >
-                Explore my skills
-                <FaArrowRight aria-hidden="true" />
-              </a>
+                <p className="mt-6 max-w-xl text-base leading-7 text-neutral-600 sm:text-lg sm:leading-8">
+                  Explore the technologies I use to build responsive
+                  interfaces, develop backend systems, and turn ideas
+                  into practical web applications.
+                </p>
 
-              <a
-                href="#daily-toolkit"
-                className="inline-flex items-center rounded-xl border border-neutral-200 bg-white px-5 py-3.5 text-sm font-semibold text-neutral-700 transition hover:border-orange-300 hover:text-orange-700"
-              >
-                My daily toolkit
-              </a>
+                {/* Technology Highlights */}
+                <div className="mt-6 flex flex-wrap gap-2">
+                  {["Frontend", "Backend", "Development Tools"].map(
+                    (skill) => (
+                      <span
+                        key={skill}
+                        className="rounded-full border border-neutral-200 bg-white/90 px-3.5 py-2 text-xs font-medium text-neutral-700 shadow-sm sm:text-sm"
+                      >
+                        {skill}
+                      </span>
+                    )
+                  )}
+                </div>
+
+                {/* Hero Actions */}
+                <div className="mt-8 flex flex-wrap gap-3">
+                  <a
+                    href="#technical-skills"
+                    className="group inline-flex items-center justify-center gap-2 rounded-xl bg-orange-500 px-5 py-3.5 text-sm font-semibold text-white shadow-lg shadow-orange-500/20 transition-all duration-300 hover:-translate-y-0.5 hover:bg-orange-600 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-orange-500 sm:px-6"
+                  >
+                    Explore My Skills
+                  </a>
+
+                  <NavLink
+                    to="/contact"
+                    className="inline-flex items-center justify-center gap-2 rounded-xl border border-neutral-200 bg-white/80 px-5 py-3.5 text-sm font-semibold text-neutral-800 transition-all duration-300 hover:border-orange-300 hover:bg-white hover:text-orange-600 sm:px-6"
+                  >
+                    Get in Touch
+                  </NavLink>
+                </div>
+              </div>
+
+              {/* Hero Image */}
+              <div className="relative mx-auto w-full max-w-lg lg:ml-auto">
+                <div
+                  aria-hidden="true"
+                  className="absolute -inset-3 rounded-[2rem] bg-gradient-to-br from-orange-200/70 via-orange-100/30 to-transparent blur-xl"
+                />
+
+                <div className="relative overflow-hidden rounded-2xl border border-white bg-white p-2 shadow-xl shadow-neutral-900/10 sm:rounded-3xl sm:p-3">
+                  <div className="relative overflow-hidden rounded-xl sm:rounded-2xl">
+                    <img
+                      src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=85"
+                      alt="Laptop and workspace for web development"
+                      className="aspect-[4/3] w-full object-cover transition-transform duration-700 hover:scale-105"
+                      fetchPriority="high"
+                    />
+
+                    <div
+                      aria-hidden="true"
+                      className="pointer-events-none absolute inset-0 bg-gradient-to-t from-neutral-950/55 via-transparent to-transparent"
+                    />
+                  </div>
+                </div>
+
+                {/* Floating Technology Card */}
+                <div className="relative mx-3 -mt-5 rounded-2xl border border-neutral-200 bg-white/95 p-4 shadow-lg shadow-neutral-900/5 backdrop-blur sm:absolute sm:-bottom-5 sm:-left-7 sm:mx-0 sm:mt-0 sm:max-w-[245px] sm:p-5">
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-orange-50 text-orange-600">
+                      <FaCode size={21} aria-hidden="true" />
+                    </div>
+
+                    <div>
+                      <p className="text-sm font-bold text-neutral-900">
+                        Full-Stack Development
+                      </p>
+                      <p className="mt-1 text-xs text-neutral-500">
+                        Frontend + Backend
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="mt-4 flex gap-1.5">
+                    <span className="h-1.5 flex-1 rounded-full bg-orange-500" />
+                    <span className="h-1.5 flex-1 rounded-full bg-orange-300" />
+                    <span className="h-1.5 flex-1 rounded-full bg-orange-100" />
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-
-          {/* Overview */}
-          <div className="mt-14 grid grid-cols-2 gap-3 sm:mt-20 sm:grid-cols-3 sm:gap-5">
-            {[
-              {
-                value: String(categories.length).padStart(2, "0"),
-                label: "Skill categories",
-              },
-              {
-                value: String(totalTechnologies).padStart(2, "0"),
-                label: "Technologies & tools",
-              },
-              {
-                value: "MERN",
-                label: "Full-stack ecosystem",
-              },
-            ].map((stat) => (
-              <div
-                key={stat.label}
-                className="rounded-2xl border border-neutral-200 bg-white/80 p-5 sm:p-6"
-              >
-                <p className="text-2xl font-bold tracking-tight sm:text-3xl">
-                  {stat.value}
-                </p>
-                <p className="mt-2 text-sm text-neutral-500">{stat.label}</p>
-              </div>
-            ))}
-          </div>
         </div>
       </section>
 
-      {/* Detailed Skill Categories */}
+      {/* Technical Skills */}
       <section
         id="technical-skills"
-        className="mx-auto max-w-7xl scroll-mt-24 px-5 py-20 sm:px-8 sm:py-28"
+        className="scroll-mt-24 px-5 py-12 sm:px-8 sm:py-16 lg:py-20"
       >
-        <div className="mb-12 max-w-2xl">
-          <p className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-orange-600">
-            Technical expertise
-          </p>
-
-          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
-            What I work with
-          </h2>
-
-          <p className="mt-4 leading-7 text-neutral-500">
-            Explore the technologies I use, what each one helps me accomplish,
-            and how they fit into my development workflow.
-          </p>
-        </div>
-
-        <div className="space-y-8">
-          {categories.map((category) => {
-            const Icon = category.icon;
-
-            return (
-              <article
-                key={category.number}
-                className="overflow-hidden rounded-2xl border border-neutral-200 bg-white transition duration-300 hover:border-orange-200 hover:shadow-xl hover:shadow-neutral-900/[0.04]"
-              >
-                {/* Category Header */}
-                <div className="grid gap-6 border-b border-neutral-200 bg-neutral-50/70 p-6 sm:p-8 md:grid-cols-[0.85fr_1.15fr] md:gap-12">
-                  <div>
-                    <div className="mb-6 flex items-center justify-between">
-                      <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-orange-500 text-white shadow-sm shadow-orange-500/20">
-                        <Icon size={21} aria-hidden="true" />
-                      </div>
-
-                      <span className="font-mono text-sm text-neutral-400">
-                        / {category.number}
-                      </span>
-                    </div>
-
-                    <h3 className="text-2xl font-bold tracking-tight sm:text-3xl">
-                      {category.title}
-                    </h3>
-
-                    <p className="mt-2 font-medium text-orange-600">
-                      {category.subtitle}
-                    </p>
-                  </div>
-
-                  <div className="self-center">
-                    <p className="text-sm leading-7 text-neutral-600 sm:text-base">
-                      {category.description}
-                    </p>
-
-                    <p className="mt-4 text-xs font-semibold uppercase tracking-widest text-neutral-400">
-                      {category.technologies.length} technologies and tools
-                    </p>
-                  </div>
-                </div>
-
-                {/* Technology Details */}
-                <div className="grid gap-0 sm:grid-cols-2 lg:grid-cols-3">
-                  {category.technologies.map((technology, index) => (
-                    <div
-                      key={technology.name}
-                      className={`group p-5 transition-colors duration-200 hover:bg-orange-50/60 sm:p-6 ${
-                        index % 2 === 0
-                          ? "border-neutral-100 sm:border-r lg:border-r-0"
-                          : ""
-                      } border-b border-neutral-100 last:border-b-0`}
-                    >
-                      <div className="mb-4 flex items-start justify-between gap-3">
-                        <h4 className="font-semibold text-neutral-900 transition-colors group-hover:text-orange-700">
-                          {technology.name}
-                        </h4>
-
-                        <span className="shrink-0 rounded-md bg-neutral-100 px-2 py-1 text-[10px] font-semibold uppercase tracking-wide text-neutral-500 transition-colors group-hover:bg-orange-100 group-hover:text-orange-700">
-                          {technology.level}
-                        </span>
-                      </div>
-
-                      <p className="text-sm leading-6 text-neutral-500">
-                        {technology.description}
-                      </p>
-
-                      <div className="mt-5 h-px w-8 bg-orange-400 transition-all duration-300 group-hover:w-14" />
-                    </div>
-                  ))}
-                </div>
-              </article>
-            );
-          })}
-        </div>
-      </section>
-
-      {/* Daily Toolkit */}
-      <section
-        id="daily-toolkit"
-        className="border-y border-neutral-200 bg-neutral-50"
-      >
-        <div className="mx-auto grid max-w-7xl gap-10 px-5 py-16 sm:px-8 sm:py-20 md:grid-cols-[0.8fr_1.2fr] md:items-center">
-          <div>
-            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-orange-600">
-              My workflow
+        <div className="mx-auto max-w-6xl">
+          {/* Section Heading */}
+          <div className="mb-8">
+            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-orange-600">
+              Technical Toolkit
             </p>
 
-            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
-              Tools I reach for regularly.
+            <h2 className="text-2xl font-bold tracking-tight text-neutral-900 sm:text-3xl">
+              Technologies I Work With
             </h2>
 
-            <p className="mt-4 max-w-lg text-sm leading-7 text-neutral-500 sm:text-base">
-              These are the technologies that form the core of my everyday
-              development workflow, from building interfaces to managing
-              application data and source code.
+            <p className="mt-3 max-w-2xl text-sm leading-7 text-neutral-600 sm:text-base">
+              Explore my frontend, backend, and development tools.
+              Each technology includes a description of how it is used.
             </p>
           </div>
 
-          <div className="flex flex-wrap gap-3">
-            {dailyTechnologies.map((technology) => (
-              <span
-                key={technology}
-                className="rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm font-medium text-neutral-700 shadow-sm transition duration-200 hover:-translate-y-0.5 hover:border-orange-300 hover:text-orange-700"
+          {/* Category Filters */}
+          <div
+            className="mb-10 flex flex-wrap gap-3"
+            role="group"
+            aria-label="Filter skills by category"
+          >
+            {categoryOptions.map(({ label, value }) => (
+              <button
+                key={value}
+                type="button"
+                onClick={() => setActiveCategory(value)}
+                aria-pressed={activeCategory === value}
+                className={`rounded-full border px-4 py-2.5 text-sm font-medium transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500 ${activeCategory === value
+                  ? "border-orange-500 bg-orange-500 text-white shadow-md shadow-orange-500/15"
+                  : "border-neutral-200 bg-white text-neutral-600 hover:border-orange-300 hover:bg-orange-50 hover:text-orange-700"
+                  }`}
               >
-                {technology}
-              </span>
+                {label}
+              </button>
             ))}
           </div>
+
+          {/* Selected Skill Category */}
+          <div className="space-y-12">
+            {filteredCategories.map((category) => {
+              const Icon = categoryIcons[category.title] || FaCode;
+
+              return (
+                <section key={category.title}>
+                  {/* Category Information */}
+                  <div className="mb-6 flex items-start gap-4">
+                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-orange-100 bg-orange-50 text-orange-600">
+                      <Icon size={22} aria-hidden="true" />
+                    </div>
+
+                    <div>
+                      <h3 className="text-xl font-bold text-neutral-900 sm:text-2xl">
+                        {category.title}
+                      </h3>
+
+                      <p className="mt-1 text-sm font-medium text-orange-600">
+                        {category.subtitle}
+                      </p>
+
+                      <p className="mt-3 max-w-3xl text-sm leading-6 text-neutral-600 sm:text-base sm:leading-7">
+                        {category.description}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Technology Cards */}
+                  <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                    {category.technologies.map((tech) => (
+                      <article
+                        key={tech.name}
+                        className="group rounded-2xl border border-neutral-200 bg-white p-5 transition-all duration-300 hover:-translate-y-1 hover:border-orange-200 hover:shadow-lg hover:shadow-orange-500/5 sm:p-6"
+                      >
+                        <div className="mb-4 flex items-start justify-between gap-3">
+                          <h4 className="text-lg font-bold text-neutral-900 transition-colors group-hover:text-orange-600">
+                            {tech.name}
+                          </h4>
+
+                          <span className="shrink-0 rounded-full bg-orange-50 px-2.5 py-1 text-xs font-medium text-orange-700">
+                            {tech.level}
+                          </span>
+                        </div>
+
+                        <p className="text-sm leading-6 text-neutral-600">
+                          {tech.description}
+                        </p>
+                      </article>
+                    ))}
+                  </div>
+                </section>
+              );
+            })}
+          </div>
         </div>
       </section>
 
-      {/* Closing Section */}
-      <section className="mx-auto max-w-7xl px-5 py-16 sm:px-8 sm:py-20">
-        <div className="flex flex-col gap-6 rounded-2xl bg-neutral-950 p-7 text-white sm:p-10 md:flex-row md:items-center md:justify-between">
-          <div className="max-w-2xl">
-            <p className="text-sm font-semibold uppercase tracking-[0.16em] text-orange-400">
-              Always improving
-            </p>
+      {/* Continuous Learning */}
+      <section className="border-y border-neutral-200 bg-neutral-50 px-5 py-16 sm:px-8 sm:py-20">
+        <div className="mx-auto max-w-6xl">
+          <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-orange-600">
+            Continuous Growth
+          </p>
 
-            <h2 className="mt-3 text-2xl font-bold tracking-tight sm:text-3xl">
-              Good development starts with continuous learning.
-            </h2>
+          <h2 className="text-2xl font-bold tracking-tight text-neutral-900 sm:text-3xl">
+            Always Learning, Always Building.
+          </h2>
 
-            <p className="mt-3 text-sm leading-7 text-neutral-400 sm:text-base">
-              I keep strengthening my fundamentals, exploring better
-              development practices, and applying what I learn through
-              practical projects.
-            </p>
+          <p className="mt-4 max-w-2xl text-base leading-7 text-neutral-600">
+            Technology keeps evolving, and so do I. I continue to
+            strengthen my development fundamentals, explore better
+            solutions, and improve through hands-on projects.
+          </p>
+        </div>
+      </section>
+
+      {/* Contact CTA */}
+      <section className="bg-white px-5 py-16 sm:px-8 sm:py-20">
+        <div className="mx-auto max-w-6xl">
+          <div className="relative isolate overflow-hidden rounded-3xl border border-orange-100 bg-gradient-to-br from-orange-50 via-white to-neutral-50 px-6 py-12 sm:px-10 sm:py-16 lg:px-16">
+            {/* Decorative Accents */}
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute -right-16 -top-20 -z-10 h-64 w-64 rounded-full bg-orange-200/40 blur-3xl"
+            />
+
+            <div
+              aria-hidden="true"
+              className="absolute right-0 top-0 h-1 w-28 rounded-bl-full bg-orange-500 sm:w-44"
+            />
+
+            <div
+              aria-hidden="true"
+              className="absolute bottom-0 left-0 h-1 w-28 rounded-tr-full bg-orange-500 sm:w-44"
+            />
+
+            <div className="relative flex flex-col items-start justify-between gap-8 md:flex-row md:items-center">
+              <div className="max-w-2xl">
+                <p className="mb-4 text-sm font-semibold uppercase tracking-[0.18em] text-orange-600">
+                  Let's Work Together
+                </p>
+
+                <h2 className="text-3xl font-bold leading-tight tracking-tight text-neutral-900 sm:text-4xl lg:text-5xl">
+                  Have a project in mind?
+                  <span className="mt-1 block text-orange-500">
+                    Let's make it happen.
+                  </span>
+                </h2>
+
+                <p className="mt-5 max-w-xl text-base leading-7 text-neutral-600 sm:text-lg">
+                  Have an idea or a challenge to solve? Let's discuss
+                  how we can turn it into something meaningful.
+                </p>
+              </div>
+
+              <div className="shrink-0">
+                <NavLink
+                  to="/contact"
+                  className="group inline-flex items-center justify-center gap-3 rounded-xl bg-orange-500 px-6 py-3.5 text-sm font-semibold text-white shadow-lg shadow-orange-500/20 transition-all duration-300 hover:-translate-y-0.5 hover:bg-orange-600 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-orange-500"
+                >
+                  Get in Touch
+
+                  <FaArrowRight
+                    className="transition-transform duration-200 group-hover:translate-x-1"
+                    aria-hidden="true"
+                  />
+                </NavLink>
+              </div>
+            </div>
           </div>
-
-          <a
-            href="/#projects"
-            className="inline-flex shrink-0 items-center justify-center gap-3 rounded-xl bg-orange-500 px-5 py-3.5 text-sm font-semibold text-white transition hover:bg-orange-400"
-          >
-            View my projects
-            <FaArrowRight aria-hidden="true" />
-          </a>
         </div>
       </section>
     </main>

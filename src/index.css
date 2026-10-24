@@ -1,1 +1,15 @@
 @import "tailwindcss";
+
+@layer base {
+    html {
+        font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    body,
+    button,
+    input,
+    textarea,
+    select {
+        font-family: inherit;
+    }
+}

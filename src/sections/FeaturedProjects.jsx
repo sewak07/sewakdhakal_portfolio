@@ -12,7 +12,7 @@ export default function FeaturedProjects() {
           </p>
 
           <h2 className="text-3xl font-bold tracking-tight text-neutral-900 sm:text-4xl lg:text-5xl">
-            Featured <span className="text-orange-500">Projects.</span>
+            Featured Projects.
           </h2>
 
           <p className="mt-4 text-base leading-7 text-neutral-600 sm:text-lg">
